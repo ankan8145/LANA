@@ -10,6 +10,7 @@ import einops
 from fvcore.nn import FlopCountAnalysis, parameter_count_table
 from ldm.ptp import ptp_SD, ptp_utils
 from ldm.models.diffusion.ddim import DDIMSampler,DDIMSampler_withsam
+from ldm.models.diffusion.plms import PLMSSampler_withsam
 from PIL import Image
 import numpy as np
 
@@ -109,12 +110,13 @@ if __name__ == "__main__":
         uc_cat = c_cat  # torch.zeros_like(c_cat)
         uc_full = {"c_concat": [uc_cat], "c_crossattn": [uc_cross]}
 
-        ddim_sampler = DDIMSampler_withsam(model)
+        # ddim_sampler = DDIMSampler_withsam(model)
+        plms_sampler = PLMSSampler_withsam(model)
         cond={"c_concat": [c_cat], "c_crossattn": [c]}
         b, c, h, w = cond["c_concat"][0].shape
         shape = (model.channels, h // 8, w // 8)
         
-        samples_cfg, intermediates = ddim_sampler.sample(ddim_steps, b, shape, cond, eta=ddim_eta,
+        samples_cfg, intermediates = plms_sampler.sample(ddim_steps, b, shape, cond, eta=ddim_eta,
                                             unconditional_guidance_scale=unconditional_guidance_scale, unconditional_conditioning=uc_full,verbose=False,
                                             use_attn_guidance=True, # 使用attn_guidance
                                             sam_mask=sam_mask, split_id=split_idx,tokens=tokens, latten_mask=z_mask, ref_img = z_ref
