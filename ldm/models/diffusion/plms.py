@@ -251,28 +251,6 @@ class PLMSSampler(object):
         return x_prev, pred_x0, e_t
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def prep_unet(unet):
     # set the gradients for XA maps to be true
     for name, params in unet.named_parameters():
