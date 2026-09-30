@@ -1,0 +1,15 @@
+torch>=1.13.1
+torchvision>=0.14.1
+pytorch-lightning>=1.8.0,<2.0.0
+transformers>=4.28.0
+open_clip_torch>=2.0.0
+einops>=0.6.0
+opencv-python>=4.5.0
+pillow>=9.0.0
+numpy>=1.22.0
+scipy>=1.9.0
+matplotlib>=3.5.0
+omegaconf>=2.1.0
+fvcore>=0.1.5
+tqdm>=4.64.0
+requests>=2.28.0
